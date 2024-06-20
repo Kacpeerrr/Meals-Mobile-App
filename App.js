@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-
 import CategoriesScreen from './screens/CategoriesScreen'
 import MealsOverviewScreen from './screens/MealsOverviewScreen'
 
@@ -12,12 +11,33 @@ const Stack = createNativeStackNavigator()
 export default function App() {
 	return (
 		<>
-			<StatusBar style='dark' />
+			<StatusBar style='light' />
 			<NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Kategorie posiłków" component={CategoriesScreen}/>
-          <Stack.Screen name="Podgląd posiłku" component={MealsOverviewScreen}/>
-        </Stack.Navigator>
+				<Stack.Navigator
+					screenOptions={{
+						headerStyle: { backgroundColor: '#351401' },
+						headerTintColor: 'white',
+						contentStyle: { backgroundColor: '#3f2f25' },
+					}}>
+					<Stack.Screen
+						name='MealsCategories'
+						component={CategoriesScreen}
+						options={{
+							title: 'Wszystkie kategorie',
+						}}
+					/>
+					<Stack.Screen
+						name='MealsOverview'
+						component={MealsOverviewScreen}
+						//Alternative for dynamic content
+						// options={({route, navigation}) => {
+						// 	const catId = route.params.categoryId
+						// 	return {
+						// 		title: catId
+						// 	}
+						// }}
+					/>
+				</Stack.Navigator>
 			</NavigationContainer>
 		</>
 	)
